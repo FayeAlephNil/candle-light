@@ -1,0 +1,4 @@
+(defmodule base 
+    (set a 4)
+    (set b 6)
+)

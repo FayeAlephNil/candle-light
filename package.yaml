@@ -1,0 +1,78 @@
+# This YAML file describes your package. Stack will automatically generate a
+# Cabal file when you run `stack build`. See the hpack website for help with
+# this file: <https://github.com/sol/hpack>.
+name: candle-light
+version: '0.0.0'
+github: "Strikingwolf/candle-light"
+license: MIT
+author: "Faye"
+maintainer: "Faye"
+# synopsis: A new Haskeleton package.
+# description: candle-light is a new Haskeleton package.
+# category: Other
+
+extra-source-files:
+- CHANGELOG.md
+- LICENSE.md
+- package.yaml
+- README.md
+- stack.yaml
+
+data-dir: base
+data-files: 
+  - ./*.candle
+
+ghc-options: -Wall
+
+default-extensions:
+  - OverloadedStrings
+  - LambdaCase
+
+library:
+  dependencies:
+  - base
+  - parsec
+  - containers
+  - mtl
+  source-dirs: library
+
+executables:
+  candle-light:
+    source-dirs: executable
+    main: Main.hs
+    dependencies:
+    - base
+    - candle-light
+    - directory
+    - filepath
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+
+benchmarks:
+  candle-light-benchmarks:
+    source-dirs: benchmark
+    main: Main.hs
+    dependencies:
+    - base
+    - candle-light
+    - criterion
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+
+tests:
+  candle-light-test-suite:
+    source-dirs: test-suite
+    main: Main.hs
+    dependencies:
+    - base
+    - candle-light
+    - tasty
+    - tasty-hspec
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
