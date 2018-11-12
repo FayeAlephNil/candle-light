@@ -160,6 +160,9 @@ defn = ("defn", ExprMacro "defn" $ \case
             (ExprFn _ func) <- eval $ ExprList (Ident "fn" : xs)
             eval (ExprList [Ident "set", Ident name, ExprFn name func])
         else noIdentName
+    (Ident name : xs@(Ident argName : _)) -> do
+        (ExprFn _ func) <- eval $ ExprList (Ident "fn" : xs)
+        eval (ExprList [Ident "set", Ident name, ExprFn name func])
     _ -> noIdentName)
     where
         noIdentName = throwError $ ArgError "defn not given either an identifier list, a name, or a definition"
@@ -168,8 +171,8 @@ defmacro :: (String, Expr)
 defmacro = ("defmacro", ExprMacro "defmacro" $ \case
     (Ident name : xs@(ExprList is : (_ : _))) -> if all isIdent is 
         then do
-            (ExprFn _ func) <- eval $ ExprList (Ident "macro" : xs)
-            eval (ExprList [Ident "set", Ident name, ExprFn name func])
+            (ExprMacro _ mac) <- eval $ ExprList (Ident "macro" : xs)
+            eval (ExprList [Ident "set", Ident name, ExprMacro name mac])
         else noIdentName
     _ -> noIdentName)
     where
@@ -200,11 +203,14 @@ eq = ("=", ExprFn "=" $ \case
 
 patList :: (String, Expr)
 patList = ("pat-list", ExprMacro "pat-list" $ \case
-    [ExprList xs, eNil, ExprList [Ident n, Ident ns], eCons] -> case xs of
-        [] -> eval eNil
-        (y : ys) -> do
-            ctx <- newContext [n, ns] [y, ExprList ys]
-            evalInCtx ctx eCons
+    [a, eNil, ExprList [Ident n, Ident ns], eCons] -> do
+        elst <- eval a
+        case elst of
+            (ExprList []) -> eval eNil
+            (ExprList (y : ys)) -> do
+                ctx <- newContext [n, ns] [y, ExprList ys]
+                evalInCtx ctx eCons
+            _ -> throwError . ArgError $ "pat-list not supplied a list"
     _ -> throwError . ArgError $ "pat-list not supplied the correct list, nil case, binding, and cons case")
 
 printIt :: (String, Expr)   

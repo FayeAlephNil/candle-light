@@ -1,4 +1,9 @@
 (defmodule base 
     (set a 4)
     (set b 6)
+    (defmacro cond' (args)
+        (pat-list args
+            nil
+            (x xs) (print xs))
+    )
 )

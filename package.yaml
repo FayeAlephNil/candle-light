@@ -34,6 +34,10 @@ library:
   - parsec
   - containers
   - mtl
+  - repline
+  - optparse-applicative
+  - directory
+  - filepath
   source-dirs: library
 
 executables:
@@ -43,8 +47,6 @@ executables:
     dependencies:
     - base
     - candle-light
-    - directory
-    - filepath
     ghc-options:
     - -rtsopts
     - -threaded

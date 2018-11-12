@@ -16,6 +16,7 @@ allParser = do
 exprParser :: Parsec String u Expr
 exprParser  = (ExprList <$> listParser)
            <|> (Lit <$> litParser)
+           <|> strParser
            <|> (Atom <$> try (char '.' >> identifier))
            <|> (Ident <$> identifier)
 
