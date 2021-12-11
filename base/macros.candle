@@ -6,4 +6,5 @@
             nil
             (x xs) (print xs))
     )
+    (print a)
 )

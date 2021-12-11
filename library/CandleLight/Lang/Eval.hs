@@ -2,7 +2,7 @@ module CandleLight.Lang.Eval where
 
 import CandleLight.Lang.Expr
 
-import Control.Monad.State
+import Control.Monad.State.Strict
 import Control.Monad.Except
 import qualified Data.Map as Map
 
@@ -31,7 +31,7 @@ lookupIn name i ctx = case Map.lookup i ctx of
 evalAll :: [Expr] -> Eval [Expr]
 evalAll = traverse eval
 
-runWith:: Context -> [Expr] -> IO (Either Error ([Expr], Context))
+runWith :: Context -> [Expr] -> IO (Either Error ([Expr], Context))
 runWith ctx exprs = runExceptT . runStateT (evalAll exprs) $ ctx
 
 errorOut :: Error -> String

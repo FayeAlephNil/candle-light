@@ -1,0 +1,72 @@
+:q
+(a b)
+(1 2)
+(cons 2 (f 2))
+(cons 2 (1 2))
+(cons 1 (1 2))
+(cons 1 '(1 2))
+(defn f (x) (+ x 1))
+(print "afsa")
+:q
+:q
+:q
+ls
+b
+a
+(set a 5)
+:q
+a
+(set a 5)
+b
+:q
+b
+(fib 5)
+(defn fib (n) (if (= n 0) then 1 else (* n (fib (- n 1)))))
+:q
+(fib 10)
+(fib 5)
+(defn fib (n) (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(fib 5)
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(defn fib 
+(= n 1)
+(fib 1)
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(= a 1)
+(= 1 1)
+(= a 1)
+(set a 1)
+(fib 1)
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(fib 1)
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(if (= 1 0) then 1 else 0)
+(if (= 0 0) then 1 else 0)
+1
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(fib 1)
+(fib 0)
+fib 0
+(defn fib n (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1))))
+(defn (fib n) (if (= n 0) then 1 else (* n (fib (- n 1)))))
+(+ 1 (* 1 5))
+(+ 1 6)
+(+ 1 5)
+:q
+a
+(set a 5)
+(set a)
+:q
+ls
+:quit
+:q
+(+ a b)
+(set b 3)
+a
+(set a 5)

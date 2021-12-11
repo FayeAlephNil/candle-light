@@ -2,7 +2,7 @@ module CandleLight.Lang.Expr where
 
 import Data.Map (Map)
 import Data.Maybe
-import Control.Monad.State
+import Control.Monad.State.Strict
 import Control.Monad.Except
 
 type Context = Map String Expr
@@ -12,6 +12,9 @@ data Error = ArgError String
            | CtxError String String Context
 
 type Eval a = StateT Context (ExceptT Error IO) a
+
+getCtx :: Eval Context
+getCtx = get
 
 data Literal = LitInt Integer
              | LitFloat Double

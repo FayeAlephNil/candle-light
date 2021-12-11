@@ -12,10 +12,10 @@ compileParse :: Parser Entry
 compileParse = Run <$> (strOption (long "file" <> metavar "TARGET" <> help "Target for compilation") <|> argument str (metavar "TARGET" <> help "Target for compilation"))
 
 replParse :: Parser Entry
-replParse = flag' Repl (long "repl" <> help "Runs the read evaluate print loop")
+replParse = option (pure Repl) (long "repl" <> help "Runs the read evaluate print loop")
 
 cliParse :: Parser Entry
-cliParse = compileParse <|> cliParse
+cliParse = compileParse <|> (pure Repl)
 
 useEntry :: Entry -> IO ()
 useEntry Repl = repl

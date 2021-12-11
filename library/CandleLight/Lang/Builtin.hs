@@ -6,7 +6,7 @@ module CandleLight.Lang.Builtin (defaultCtx) where
 import CandleLight.Lang.Expr
 import CandleLight.Lang.Eval
 
-import Control.Monad.State
+import Control.Monad.State.Strict
 import Control.Monad.Except
 import qualified Data.Map as Map
 -- import Data.Map (Map, (!))
@@ -134,8 +134,6 @@ fn = ("fn", ExprMacro "fn" $ \case
         where
             noIdentName = throwError $ ArgError "fn not given identifier list or a definition"
 
-            
-
 macro :: (String, Expr)
 macro = ("macro", ExprMacro "macro" $ \case
             (ExprList is : (e : es)) -> if all isIdent is
@@ -191,6 +189,10 @@ ifMacro = ("if", ExprMacro "if" $ \case
 
 argLit :: String -> Expr -> Eval Literal
 argLit _ (Lit l) = pure l
+argLit n (Ident name) = do
+  ctx <- get
+  expr <- lookupIn "" name ctx
+  argLit n expr
 argLit n _ = throwError . ArgError $ n ++ "supplied a non-literal"
      
 eq :: (String, Expr)
